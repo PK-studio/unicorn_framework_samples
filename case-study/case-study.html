@@ -1,0 +1,41 @@
+<section class="container casestudy_container">
+	<div class="text-box case_study_text">
+		<h2> {{ title | safe }} </h2>
+		{{ text | safe }}
+	</div>
+
+	<div class="case_study_container">
+		<div class="case_study_width">
+			{% for page in pages %}
+			<div class="case_study_page case_study_page_{{ page.layout }}">
+				{% if page.layout === 'double' %} <div class="scrollableBox"> {% endif %}
+					{% for part in page.parts %}
+					<div class="case_study_part">
+						{% if part.intro %}
+						<div class="case_study_part_intro"><p> {{ part.intro | safe }} </p></div>
+						{% endif %}
+						<div class="case_study_part_image">
+							<img src="media/images/{{ part.image }}" alt="">
+						</div>
+						{% if part.content %}
+						<div class="case_study_part_content case_study_part_content_{{ part.tailxpos }}"><p> {{ part.content | safe }} </p></div>
+						{% else %}
+						<div class="case_study_part_nocontent"> &nbsp; </div>
+						{% endif %}
+					</div>
+					{% endfor %}
+				{% if page.layout === 'double' %} </div> {% endif %}
+			</div>
+			{% endfor %}
+		</div>
+		{% if pages.length > 1 %}
+		<div class="case_study_controls">
+			{% for page in pages %}
+				<div class="case_study_select">{{ loop.index }}</div>
+			{% endfor %}
+			<div class="tempControls"><p><b>Swipe content.</b></p></div>
+		</div>
+		{% endif %}
+	</div>
+
+</section>

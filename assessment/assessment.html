@@ -1,0 +1,20 @@
+<section class="assessment container">
+	<div class="assessment_questions" data-bind="foreach: questions">
+		<div class="assessment_wrapper" data-bind="css: {'assessment_enabled': enabled()}">
+			<h2 class="diagnostic_title" data-bind="text: title"></h2>
+			<div class="text-box assessment_text_box">
+				<span data-bind="html: question"></span>
+			</div>
+			{% include "question_types" %}
+
+			<div class="question_submit_btn btn_text" data-bind="click: submit, css: {submit_active: anyChecked(), submit_clicked: submitClicked()}">{{ root.strings.submit }}</div>
+			<div class="assessment_feedback"></div>
+			<!-- ko if: $index() < $parent.questions.length - 1 -->
+			<button class="scroll_next_assessment" data-bind="visible: submitClicked, click: nextButton, css: {active: submitClicked}">{{ root.strings.nextQuestion }}</button>
+			<!-- /ko -->
+		</div>
+	</div>
+	<div class="assessment_results">
+		
+	</div>
+</section>
